@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="0dp"
+    tools:context=".MainActivity"
+    >
+
+<!--    <include-->
+<!--        android:id="@+id/toolbar"-->
+<!--        layout="@layout/toolbar">-->
+<!--    </include>-->
+
+    <TableRow
+        android:id="@+id/tblRowDate"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/lblDate"
+            android:gravity="bottom"
+            android:text="@string/datum"
+            android:textAlignment="textStart"
+            tools:ignore="RtlCompat" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dateValue"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tblRowKm"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/km"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/lblKm"
+            android:gravity="bottom"
+            android:text="@string/km"
+            android:textAlignment="textStart"
+            tools:ignore="RtlCompat" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/kmInitialValue"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:inputType="number" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/kmEndValue"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:inputType="number" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tblRowKfz"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/kfz"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/lblKfz"
+            android:gravity="bottom"
+            android:text="@string/kfz"
+            android:textAlignment="textStart"
+            tools:ignore="RtlCompat" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/kfzValue"
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="@string/kennzeichen" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tblRowTimeOfDay"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/timeOfDay"
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/lblTimeOfDay"
+            android:gravity="bottom"
+            android:text="@string/tageszeit"
+            android:textAlignment="textStart"
+            tools:ignore="RtlCompat" />
+
+        <Spinner
+            android:id="@+id/timeOfDayValue"
+            android:layout_width="1dp"
+            android:layout_height="50dp"
+            android:layout_weight="1" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tblRowRoute"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/route"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/lblRoute"
+            android:gravity="bottom"
+            android:text="@string/route"
+            android:textAlignment="textStart"
+            tools:ignore="RtlCompat" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/routeValue"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tblRowStreetCondition"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/streetCondition"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/lblStreetCondition"
+            android:gravity="bottom"
+            android:text="@string/streetCondition"
+            android:textAlignment="textStart"
+            tools:ignore="RtlCompat" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/conditionValue"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </TableRow>
+
+    <Button
+        android:onClick="add"
+        android:text="@string/add" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:clipToPadding="false"/>
+
+</TableLayout>

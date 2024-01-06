@@ -1,0 +1,19 @@
+<!-- res/menu/menu_main.xml -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_save"
+        android:title="@string/save"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_signature_begleiter"
+        android:title="@string/signature_begleiter" />
+
+    <item
+        android:id="@+id/menu_signature_bewerber"
+        android:title="@string/signature_bewerber" />
+
+</menu>

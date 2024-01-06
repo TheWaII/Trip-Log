@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">protokoll</string>
+    <string name="lbldate">lblDate</string>
+    <string name="lblDate" />
+    <string name="datum">Datum</string>
+    <string name="lblKm">Kilometer</string>
+    <string name="km">Kilometer</string>
+    <string name="lblKfz">Kennzeichen</string>
+    <string name="kfz">Kennzeichen</string>
+    <string name="lblTimeOfDay" />
+    <string name="tageszeit">Tageszeit</string>
+    <string name="lblRoute" />
+    <string name="route">Fahrstrecke/-ziel</string>
+    <string name="lblStreetCondition" />
+    <string name="streetCondition">Straßenzustand, Witterung</string>
+    <string name="add">Hinzufügen</string>
+    <string name="kennzeichen">W-99566D</string>
+    <string name="save">Save</string>
+    <string name="signature_begleiter">Signature Begleiter</string>
+    <string name="signature_bewerber">Signature Bewerber</string>
+
+    <string-array name="timeOfDay">
+        <item>Morgen</item>
+        <item>Mittag</item>
+        <item>Abend</item>
+        <item>Nacht</item>
+    </string-array>
+</resources>
+
+
