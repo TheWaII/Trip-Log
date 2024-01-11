@@ -16,7 +16,8 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class PdfGenerator {
 
@@ -25,8 +26,6 @@ class PdfGenerator {
             context: Context, proList: List<LogItem>, unterschriftBegleiter: Bitmap?,
             unterschriftBewerber: Bitmap?
         ) {
-            // Display a Toast indicating the document creation has started
-
             Toast.makeText(
                 context, "Creating PDF...", Toast.LENGTH_SHORT
             ).show()
@@ -40,45 +39,37 @@ class PdfGenerator {
                     directory.mkdirs()
                 }
 
-                // Generate a unique filename with current timestamp
                 val timeStamp =
                     SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
                 val fileName = "pdf_$timeStamp"
 
                 val filePath = File(directory, "$fileName.pdf")
 
-                // Set the document size to a larger dimension (e.g., A3)
                 val pageSize = com.itextpdf.text.PageSize.A3.rotate()
                 val writer = PdfWriter.getInstance(document, FileOutputStream(filePath))
                 document.pageSize = pageSize
                 document.open()
 
-                // Add a title to the document
                 val titleFont = Font(Font.FontFamily.TIMES_ROMAN, 18f, Font.BOLD)
                 val title = Paragraph("Fahrtenprotokoll", titleFont)
                 title.alignment = Element.ALIGN_CENTER
                 document.add(title)
 
-                // Create a table with automatic width
-                val table = PdfPTable(10) // 10 columns, including two for signatures
-                table.widthPercentage = 100f // Use 100% of the page width
+                val table = PdfPTable(10)
+                table.widthPercentage = 100f
                 table.spacingBefore = 10f
 
-                // Add table headers
                 addTableHeader(table)
 
-                // Add data rows
                 for (item in proList) {
                     addRow(table, item, unterschriftBegleiter, unterschriftBewerber)
                 }
 
-                // Add the table to the document
                 document.add(table)
 
                 document.close()
                 writer.close()
 
-                // Display a Toast indicating the document has been created and saved
 
                 Toast.makeText(
                     context, "PDF created and saved in Downloads folder", Toast.LENGTH_SHORT
@@ -87,7 +78,6 @@ class PdfGenerator {
             } catch (e: Exception) {
                 Log.e("PDF Generator", "Error creating PDF", e)
 
-                // Display a Toast indicating an error occurred during document creation
                 Toast.makeText(
                     context, "Error creating PDF", Toast.LENGTH_SHORT
                 ).show()
@@ -131,19 +121,15 @@ class PdfGenerator {
             val route = PdfPCell(Paragraph(item.route))
             val condition = PdfPCell(Paragraph(item.condition))
 
-            // Convert bitmaps to byte arrays for iText
             val byteArrayBegleiter = getByteArrayFromBitmap(unterschriftBegleiter)
             val byteArrayBewerber = getByteArrayFromBitmap(unterschriftBewerber)
 
-            // Create Image instances from byte arrays
             val imageBegleiter = Image.getInstance(byteArrayBegleiter)
             val imageBewerber = Image.getInstance(byteArrayBewerber)
 
-            // Scale images if needed
             imageBegleiter.scaleToFit(100f, 50f)
             imageBewerber.scaleToFit(100f, 50f)
 
-            // Add cells to the row
             table.addCell(date)
             table.addCell(gefahreneKm)
             table.addCell(kmInit)

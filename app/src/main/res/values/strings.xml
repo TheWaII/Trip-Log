@@ -14,10 +14,12 @@
     <string name="lblStreetCondition" />
     <string name="streetCondition">Straßenzustand, Witterung</string>
     <string name="add">Hinzufügen</string>
-    <string name="kennzeichen">W-99566D</string>
     <string name="save">Save</string>
     <string name="signature_begleiter">Signature Begleiter</string>
     <string name="signature_bewerber">Signature Bewerber</string>
+
+    <string name="log_item_format">%1\$s — %2\$s km — %3\$s km — %4\$s — %5\$s — %6\$s — %7\$s</string>
+
 
     <string-array name="timeOfDay">
         <item>Morgen</item>

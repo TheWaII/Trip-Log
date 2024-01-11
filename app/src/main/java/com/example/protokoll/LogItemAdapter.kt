@@ -22,10 +22,20 @@ class LogItemAdapter(private val proList: List<LogItem>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = proList[position]
-        holder.logItemTextView.text = "${currentItem.date} -- ${currentItem.kmInit} km -- " +
-                "${currentItem.kmEnd} km -- ${currentItem.kfz} -- ${currentItem.timeOfDay} -- " +
-                "${currentItem.route} -- ${currentItem.condition}"
+        val logItemFormat = holder.itemView.context.getString(R.string.log_item_format)
+        val formattedText = String.format(
+            logItemFormat,
+            currentItem.date,
+            currentItem.kmInit,
+            currentItem.kmEnd,
+            currentItem.kfz,
+            currentItem.timeOfDay,
+            currentItem.route,
+            currentItem.condition
+        )
+        holder.logItemTextView.text = formattedText
     }
+
 
     override fun getItemCount() = proList.size
 }

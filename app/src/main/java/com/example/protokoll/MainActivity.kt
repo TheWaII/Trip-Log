@@ -10,6 +10,7 @@ import android.graphics.Bitmap
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -31,9 +32,6 @@ class MainActivity : AppCompatActivity() {
 
     private val myCalendar: Calendar = Calendar.getInstance()
     private var editText: EditText? = null
-
-
-    private var proItems = LogItem()
 
     private var begleiterSignature: Bitmap? = null
     private var bewerberSignature: Bitmap? = null
@@ -58,7 +56,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter = LogItemAdapter(proList)
 
-        // Set up RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
@@ -74,21 +71,35 @@ class MainActivity : AppCompatActivity() {
         val route: EditText = findViewById(R.id.routeValue)
         val condition: EditText = findViewById(R.id.conditionValue)
 
-        // Create a new instance of LogItem
         val newLogItem = LogItem()
 
-        newLogItem.date = date.text.toString()
-        newLogItem.kmInit = kmInit.text.toString().toInt()
-        newLogItem.kmEnd = kmEnd.text.toString().toInt()
-        newLogItem.kfz = kfz.text.toString()
-        newLogItem.timeOfDay = timeOfDay.selectedItem.toString()
-        newLogItem.route = route.text.toString()
-        newLogItem.condition = condition.text.toString()
+        if (date.text.toString().isEmpty() || kmInit.text.toString()
+                .isEmpty() || kmEnd.text.toString().isEmpty() ||
+            kfz.text.isEmpty() || timeOfDay.toString()
+                .isEmpty() || route.text.isEmpty() || condition.text.isEmpty()
+        ) {
+            Toast.makeText(applicationContext, "Bitte alles ausfüllen!", Toast.LENGTH_SHORT).show()
+        } else {
+            newLogItem.date = date.text.toString()
+            newLogItem.kmInit = kmInit.text.toString().toInt()
+            newLogItem.kmEnd = kmEnd.text.toString().toInt()
+            newLogItem.kfz = kfz.text.toString()
+            newLogItem.timeOfDay = timeOfDay.selectedItem.toString()
+            newLogItem.route = route.text.toString()
+            newLogItem.condition = condition.text.toString()
 
-        proList.add(newLogItem)
+            proList.add(newLogItem)
 
-        saveData()
-        populateList()
+            kfz.text.clear()
+            kmInit.text.clear()
+            kmEnd.text.clear()
+            route.text.clear()
+            condition.text.clear()
+
+            saveData()
+            populateList()
+        }
+
     }
 
 
@@ -100,14 +111,11 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        // Create a custom adapter for RecyclerView
         val adapter = LogItemAdapter(proList)
 
-        // Set up RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        // Add swipe-to-delete functionality
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
@@ -133,8 +141,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
-
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
@@ -144,9 +150,7 @@ class MainActivity : AppCompatActivity() {
         ArrayAdapter.createFromResource(
             this, R.array.timeOfDay, android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
     }
@@ -183,6 +187,7 @@ class MainActivity : AppCompatActivity() {
         val json = gson.toJson(proList)
         editor.putString(TASK_LIST, json)
         editor.apply()
+        println(Environment.getDataDirectory())
     }
 
     private fun loadData() {
@@ -223,7 +228,6 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.menu_save -> {
                 if (begleiterSignature == null || bewerberSignature == null) {
-                    // Display a Toast indicating where the signature is missing
                     if (begleiterSignature == null) {
                         Toast.makeText(
                             this, "Begleiter signature is missing!", Toast.LENGTH_SHORT
@@ -234,7 +238,6 @@ class MainActivity : AppCompatActivity() {
                             this, "Bewerber signature is missing!", Toast.LENGTH_SHORT
                         ).show()
                     }
-                    // Return false to indicate that the menu item action was not consumed
                     false
                 } else {
                     PdfGenerator.generatePdf(this, proList, begleiterSignature, bewerberSignature)
@@ -248,7 +251,6 @@ class MainActivity : AppCompatActivity() {
                     override fun onSigned() {}
                     override fun onClear() {}
                 }) { signatureBitmap ->
-                    // Save the signature to the variable
                     begleiterSignature = signatureBitmap
                 }
                 true
@@ -260,7 +262,6 @@ class MainActivity : AppCompatActivity() {
                     override fun onSigned() {}
                     override fun onClear() {}
                 }) { signatureBitmap ->
-                    // Save the signature to the variable
                     bewerberSignature = signatureBitmap
                 }
                 true

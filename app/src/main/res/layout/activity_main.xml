@@ -6,14 +6,16 @@
     android:id="@+id/tableLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="0dp"
-    tools:context=".MainActivity"
-    >
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="10dp"
+    tools:context=".MainActivity">
 
-<!--    <include-->
-<!--        android:id="@+id/toolbar"-->
-<!--        layout="@layout/toolbar">-->
-<!--    </include>-->
+    <!--    <include-->
+    <!--        android:id="@+id/toolbar"-->
+    <!--        layout="@layout/toolbar">-->
+    <!--    </include>-->
 
     <TableRow
         android:id="@+id/tblRowDate"
@@ -93,8 +95,7 @@
             android:id="@+id/kfzValue"
             android:layout_width="1dp"
             android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="@string/kennzeichen" />
+            android:layout_weight="1" />
     </TableRow>
 
     <TableRow
@@ -171,13 +172,18 @@
 
     <Button
         android:onClick="add"
-        android:text="@string/add" />
+        android:text="@string/add"
+        android:height="60dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        android:padding="16dp" />
+
+
 
 </TableLayout>
+
